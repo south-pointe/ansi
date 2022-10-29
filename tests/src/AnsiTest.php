@@ -6,11 +6,9 @@ use InvalidArgumentException;
 use SouthPointe\Ansi\Ansi;
 use SouthPointe\Ansi\Buffer;
 use SouthPointe\Ansi\Codes\Color;
-use SouthPointe\Ansi\Codes\Sgr;
 use Tests\SouthPointe\Ansi\Helpers\IntEnumSample;
 use Tests\SouthPointe\Ansi\Helpers\StringableSample;
 use Tests\SouthPointe\Ansi\Helpers\StringEnumSample;
-use function dump;
 
 class AnsiTest extends TestCase
 {
@@ -247,5 +245,19 @@ class AnsiTest extends TestCase
     public function test_background(): void
     {
         self::assertEquals("\e[48;5;9m", Ansi::background(Color::Red));
+    }
+
+    public function test_deviceStatusReport(): void
+    {
+        self::assertEquals("\e[6n", Ansi::deviceStatusReport());
+    }
+
+    public function test_getTerminalSize(): void
+    {
+        $position = Ansi::getTerminalSize();
+        self::assertArrayHasKey('row', $position);
+        self::assertArrayHasKey('column', $position);
+        self::assertIsInt($position['row']);
+        self::assertIsInt($position['column']);
     }
 }

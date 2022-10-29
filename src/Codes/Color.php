@@ -2,6 +2,8 @@
 
 namespace SouthPointe\Ansi\Codes;
 
+use Webmozart\Assert\Assert;
+
 enum Color: string
 {
     case Black = '0';
@@ -274,6 +276,9 @@ enum Color: string
                 $mapped[$case->value] = $case;
             }
         }
-        return $mapped[(string) $code];
+
+        Assert::keyExists($mapped, $code);
+
+        return $mapped[$code];
     }
 }

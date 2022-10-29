@@ -16,6 +16,7 @@ use Webmozart\Assert\Assert;
 use function assert;
 use function compact;
 use function fread;
+use function fwrite;
 use function implode;
 use function php_sapi_name;
 use function shell_exec;
@@ -23,6 +24,7 @@ use function sscanf;
 use function system;
 use function trim;
 use const STDIN;
+use const STDOUT;
 
 final class Ansi
 {
@@ -349,12 +351,39 @@ final class Ansi
     }
 
     /**
+     * @return string
+     */
+    public static function deviceStatusReport(): string
+    {
+        return self::sequence(C0::Escape, Fe::CSI, Csi::DeviceStatusReport);
+    }
+
+    /**
      * @return array{ row: int, column: int }
      */
-    public static function getDeviceStatusReport(): array
+    public static function getTerminalSize(): array
     {
         self::assertCliMode(__METHOD__);
 
+        $current = self::captureDeviceStatusReport();
+
+        // Move as far away as it can to determine the max cursor position.
+        fwrite(STDOUT, self::cursorPosition(9999, 9999));
+
+        // get the max position which is the size of the terminal.
+        $size = self::captureDeviceStatusReport();
+
+        // Restore cursor position.
+        fwrite(STDOUT, self::cursorPosition(...$current));
+
+        return $size;
+    }
+
+    /**
+     * @return array{ row: int, column: int }
+     */
+    private static function captureDeviceStatusReport(): array
+    {
         // backup original stty mode
         $stty = trim((string) shell_exec('stty -g'));
 
@@ -362,7 +391,7 @@ final class Ansi
         system("stty -icanon -echo");
 
         try {
-            echo self::sequence(C0::Escape, Fe::CSI, Csi::DeviceStatusReport);
+            fwrite(STDOUT, self::deviceStatusReport());
             $code = trim((string) fread(STDIN, 100));
             sscanf($code, "\e[%d;%dR", $row, $column);
             return compact('row', 'column');
@@ -373,32 +402,11 @@ final class Ansi
     }
 
     /**
-     * @return array{ row: int, column: int }
-     */
-    public static function getTerminalSize(): array
-    {
-        self::assertCliMode(__METHOD__);
-
-        $current = self::getDeviceStatusReport();
-
-        // Move as far away as it can to determine the max cursor position.
-        echo self::cursorPosition(9999, 9999);
-
-        // get the max position which is the size of the terminal.
-        $size = self::getDeviceStatusReport();
-
-        // Restore cursor position.
-        echo self::cursorPosition(...$current);
-
-        return $size;
-    }
-
-    /**
      * @param string $function
      * @return void
      */
     private static function assertCliMode(string $function): void
     {
-        assert(php_sapi_name() !== 'cli', "$function only works in cli mode.");
+        assert(php_sapi_name() === 'cli', "$function only works in cli mode.");
     }
 }

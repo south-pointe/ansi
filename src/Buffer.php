@@ -4,12 +4,10 @@ namespace SouthPointe\Ansi;
 
 use BackedEnum;
 use SouthPointe\Ansi\Codes\Color;
-use SouthPointe\Ansi\Codes\Sgr;
 use Stringable;
-use function assert;
+use Webmozart\Assert\Assert;
 use function fwrite;
 use function implode;
-use function is_resource;
 use const STDOUT;
 
 final class Buffer implements Stringable
@@ -227,33 +225,6 @@ final class Buffer implements Stringable
     /**
      * @return $this
      */
-    public function foreground(Color $color): self
-    {
-        return $this->buffer(Ansi::foreground($color));
-    }
-
-    /**
-     * @param Color $color
-     * @return $this
-     */
-    public function background(Color $color): self
-    {
-        return $this->buffer(Ansi::background($color));
-    }
-
-    /**
-     * @param Color $color
-     * @param Sgr $section
-     * @return $this
-     */
-    public function color(Color $color, Sgr $section): self
-    {
-        return $this->buffer(Ansi::color($color, $section));
-    }
-
-    /**
-     * @return $this
-     */
     public function resetStyle(): self
     {
         return $this->buffer(Ansi::resetStyle());
@@ -294,6 +265,22 @@ final class Buffer implements Stringable
         return $this->buffer(Ansi::blink($toggle));
     }
 
+    /**
+     * @return $this
+     */
+    public function foreground(Color $color): self
+    {
+        return $this->buffer(Ansi::foreground($color));
+    }
+
+    /**
+     * @param Color $color
+     * @return $this
+     */
+    public function background(Color $color): self
+    {
+        return $this->buffer(Ansi::background($color));
+    }
 
     /**
      * @param resource $to
@@ -301,8 +288,7 @@ final class Buffer implements Stringable
      */
     public function flush(mixed $to = STDOUT): self
     {
-        assert(is_resource($to), '$to must be a resource type.');
-
+        Assert::resource($to);
         fwrite($to, $this->toString());
         return $this->clear();
     }
