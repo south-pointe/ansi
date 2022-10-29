@@ -1,0 +1,39 @@
+{
+  "name": "taka-oyama/ansi-php",
+  "description": "Library for creating ANSI escape codes in PHP",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": ">= 8.1",
+    "webmozart/assert": "^1.1"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.8",
+    "phpunit/phpunit": "~9.0",
+    "symfony/var-dumper": "^6"
+  },
+  "autoload": {
+    "psr-4": {
+      "SouthPointe\\Ansi\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\SouthPointe\\Ansi\\": "tests/src/"
+    }
+  },
+  "config": {
+    "discard-changes": true,
+    "preferred-install": "dist",
+    "sort-packages": true,
+    "allow-plugins": {
+      "phpstan/extension-installer": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "scripts": {
+    "test": "vendor/bin/phpunit --coverage-text",
+    "analyze": "vendor/bin/phpstan analyse --memory-limit 1G"
+  }
+}
