@@ -32,11 +32,6 @@ class AnsiTest extends TestCase
         Ansi::sequence(IntEnumSample::Case);
     }
 
-    public function test_text(): void
-    {
-        self::assertEquals('test text', Ansi::text('test text'));
-    }
-
     public function test_line(): void
     {
         self::assertEquals("\e[0m\r\n", Ansi::line());

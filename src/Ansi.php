@@ -70,7 +70,7 @@ final class Ansi
     public static function line(string $text = ''): string
     {
         return
-            self::text($text) .
+            self::sequence($text) .
             self::resetStyle() .
             self::carriageReturn() .
             self::lineFeed();

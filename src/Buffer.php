@@ -32,7 +32,7 @@ final class Buffer implements Stringable
      */
     public function text(string $text): self
     {
-        return $this->buffer(Ansi::text($text));
+        return $this->buffer(Ansi::sequence($text));
     }
 
     /**
