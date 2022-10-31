@@ -2,6 +2,16 @@
 
 ![GitHub](https://img.shields.io/github/license/south-pointe/ansi)
 
+This library will enable you to easily generate ANSI sequence strings in CLI.
+
+The list below are some things you can do with with this library.
+
+- Set foreground/background color
+- Set font styles (bold/italic)
+- Move cursor positions
+- Clear the screen
+- Get the terminal size
+
 ## Prerequisites
 
 - PHP 8.1+
@@ -21,7 +31,7 @@ use SouthPointe\Ansi\Codes\Color;
 // Change foreground text to blue.
 echo Ansi::foreground(Color::Blue);
 
-// You can also set color by code (0 ~ 255)
+// You can also set color by 256-color mode.
 echo Ansi::foreground(Color::code(12));
 
 // Move the cursor back by 2.
@@ -43,6 +53,16 @@ echo Ansi::buffer()
     ->resetStyle()
     ->flush(STDOUT);
 
-// return an array that contains position of row and column.
+// Returns the size of the terminal as ['row' => int, 'column' => int].
 echo Ansi::getTerminalSize();
 ```
+
+## License
+
+This is an open-sourced software licensed under the [MIT License](LICENSE).
+
+## References
+
+- [ANSI escape code - Wikipedia](https://en.wikipedia.org/wiki/ANSI_escape_code)
+- [ANSI Escape Codes - Gist](https://gist.github.com/fnky/458719343aabd01cfb17a3a4f7296797)
+- [Chapter 6. ANSI Escape Sequences: Colours and Cursor Movement - Bash Prompt HOWTO](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/c327.html)
