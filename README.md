@@ -1,6 +1,6 @@
 # ANSI sequence generator library for PHP
 
-![Phpunit](https://github.com/south-pointe/ansi/actions/workflows/test.yml/badge.svg)
+![Test](https://github.com/south-pointe/ansi/actions/workflows/test.yml/badge.svg)
 ![GitHub](https://img.shields.io/github/license/south-pointe/ansi)
 
 This library will enable you to easily generate ANSI sequence strings in CLI.
