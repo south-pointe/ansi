@@ -1,10 +1,11 @@
 # ANSI sequence generator library for PHP
 
+![Test Result](https://github.com/south-pointe/ansi/actions/workflows/test.yml/badge.svg)
 ![GitHub](https://img.shields.io/github/license/south-pointe/ansi)
 
 This library will enable you to easily generate ANSI sequence strings in CLI.
 
-The list below are some things you can do with with this library.
+The list below are some things you can do with this library.
 
 - Set foreground/background color
 - Set font styles (bold/italic)

@@ -1,0 +1,13 @@
+name: Run Test
+on: [push]
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v5
+    - uses: php-actions/phpunit@v3
+      with:
+        bootstrap: vendor/autoload.php
+        configuration: phpunit.xml
+        php_version: "8.1"
