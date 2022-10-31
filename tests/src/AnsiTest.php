@@ -9,6 +9,7 @@ use SouthPointe\Ansi\Codes\Color;
 use Tests\SouthPointe\Ansi\Helpers\IntEnumSample;
 use Tests\SouthPointe\Ansi\Helpers\StringableSample;
 use Tests\SouthPointe\Ansi\Helpers\StringEnumSample;
+use const STDOUT;
 
 class AnsiTest extends TestCase
 {
@@ -249,6 +250,10 @@ class AnsiTest extends TestCase
 
     public function test_getTerminalSize(): void
     {
+        if (posix_isatty(STDOUT)) {
+            $this->markTestSkipped('tty required to get terminal size.');
+        }
+
         $position = Ansi::getTerminalSize();
         self::assertArrayHasKey('row', $position);
         self::assertArrayHasKey('column', $position);
