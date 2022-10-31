@@ -394,7 +394,6 @@ final class Ansi
         try {
             fwrite(STDOUT, self::deviceStatusReport());
             $code = trim((string) fread(STDIN, 100));
-            dump($code);
             sscanf($code, "\e[%d;%dR", $row, $column);
             return compact('row', 'column');
         }
