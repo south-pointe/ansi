@@ -59,15 +59,6 @@ final class Ansi
      * @param string $text
      * @return string
      */
-    public static function text(string $text): string
-    {
-        return self::sequence($text);
-    }
-
-    /**
-     * @param string $text
-     * @return string
-     */
     public static function line(string $text = ''): string
     {
         return
