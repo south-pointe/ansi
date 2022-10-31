@@ -1,5 +1,7 @@
 # ANSI sequence generator library for PHP
 
+![GitHub](https://img.shields.io/github/license/south-pointe/ansi)
+
 ## Prerequisites
 
 - PHP 8.1+
@@ -18,6 +20,9 @@ use SouthPointe\Ansi\Codes\Color;
 
 // Change foreground text to blue.
 echo Ansi::foreground(Color::Blue);
+
+// You can also set color by code (0 ~ 255)
+echo Ansi::foreground(Color::code(12));
 
 // Move the cursor back by 2.
 echo Ansi::cursorBack(2);
