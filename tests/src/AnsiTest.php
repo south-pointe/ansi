@@ -250,7 +250,7 @@ class AnsiTest extends TestCase
 
     public function test_getTerminalSize(): void
     {
-        if (posix_isatty(STDOUT)) {
+        if (!posix_isatty(STDOUT)) {
             $this->markTestSkipped('tty required to get terminal size.');
         }
 
