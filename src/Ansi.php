@@ -15,6 +15,7 @@ use Stringable;
 use Webmozart\Assert\Assert;
 use function assert;
 use function compact;
+use function dump;
 use function fread;
 use function fwrite;
 use function implode;
@@ -393,6 +394,7 @@ final class Ansi
         try {
             fwrite(STDOUT, self::deviceStatusReport());
             $code = trim((string) fread(STDIN, 100));
+            dump($code);
             sscanf($code, "\e[%d;%dR", $row, $column);
             return compact('row', 'column');
         }
