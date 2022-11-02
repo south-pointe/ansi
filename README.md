@@ -59,6 +59,18 @@ echo Ansi::buffer()
 echo Ansi::getTerminalSize();
 ```
 
+## Methods
+
+-----
+
+1. `Ansi::line($text): string` - Output text, reset style, and move to the new line.
+1. `Ansi::bell(): string` - Rings the bell.
+1. `Ansi::backspace(): string` - Moves the cursor back.
+1. `Ansi::tab(): string` - Moves the cursor by 8 spaces.
+1. `Ansi::lineFeed(): string` - Moves to the next line and scroll screen up.
+1. `Ansi::carriageReturn(): string` - Moves the cursor to column 0.
+1. `Ansi::cursorUp(int $cells = 1): string` - Moves the cursor up by a given amount. 
+
 ## License
 
 This is an open-sourced software licensed under the [MIT License](LICENSE).

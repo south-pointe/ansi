@@ -121,7 +121,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes for moving the cursor to column zero.
+     * Returns ANSI codes for moving the cursor to column 0.
      *
      * @return string
      */
