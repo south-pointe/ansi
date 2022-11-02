@@ -15,7 +15,6 @@ use Stringable;
 use Webmozart\Assert\Assert;
 use function assert;
 use function compact;
-use function dump;
 use function fread;
 use function fwrite;
 use function implode;
@@ -29,16 +28,22 @@ use const STDOUT;
 
 final class Ansi
 {
+    /**
+     * Returns a similar ANSI instance which can be used to chain several sequences.
+     * @return Buffer
+     */
     public static function buffer(): Buffer
     {
         return new Buffer();
     }
 
     /**
+     * Turns given sequences into proper string format.
+     *
      * @param string|Stringable|BackedEnum ...$sequences
      * @return string
      */
-    public static function sequence(string|Stringable|BackedEnum ...$sequences): string
+    protected static function sequence(string|Stringable|BackedEnum ...$sequences): string
     {
         $casted = [];
 
@@ -56,6 +61,12 @@ final class Ansi
     }
 
     /**
+     * A Returns ANSI codes which combines the following sequences.
+     * - The given text
+     * - Reset style
+     * - Carriage return
+     * - Line feed
+     *
      * @param string $text
      * @return string
      */
@@ -69,6 +80,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes for ringing the bell.
+     *
      * @return string
      */
     public static function bell(): string
@@ -77,6 +90,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes for moving the cursor back.
+     *
      * @return string
      */
     public static function backspace(): string
@@ -85,6 +100,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes for moving the cursor to the right 8 times.
+     *
      * @return string
      */
     public static function tab(): string
@@ -93,6 +110,9 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes for moving to the next line and scrolling the display up
+     * if the cursor is at bottom of the screen.
+     *
      * @return string
      */
     public static function lineFeed(): string
@@ -101,6 +121,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes for moving the cursor to column zero.
+     *
      * @return string
      */
     public static function carriageReturn(): string
@@ -109,6 +131,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will move the cursor up by the given amount.
+     *
      * @param int $cells
      * @return string
      */
@@ -121,6 +145,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will move the cursor down by the given amount.
+     *
      * @param int $cells
      * @return string
      */
@@ -133,6 +159,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will move the cursor forward by the given amount.
+     *
      * @param int $cells
      * @return string
      */
@@ -145,6 +173,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will move the cursor backwards by the given amount.
+     *
      * @param int $cells
      * @return string
      */
@@ -157,6 +187,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which moves cursor to the beginning of next line.
+     *
      * @param int $cells
      * @return string
      */
@@ -169,6 +201,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which moves cursor to the beginning of previous line.
+     *
      * @param int $cells
      * @return string
      */
@@ -181,6 +215,9 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which moves the cursor to the given position.
+     * In order to get the current position, { @see self::getTerminalSize() }
+     *
      * @param int $row
      * @param int $column
      * @return string
@@ -191,6 +228,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will erase the entire screen.
+     *
      * @return string
      */
     public static function eraseScreen(): string
@@ -199,6 +238,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will erase from the cursor to the end of screen.
+     *
      * @return string
      */
     public static function eraseToEndOfScreen(): string
@@ -207,6 +248,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will erase from the start of screen to the cursor position.
+     *
      * @return string
      */
     public static function eraseFromStartOfScreen(): string
@@ -215,6 +258,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which clears the screen and deletes all lines saved in the scrollback buffer.
+     *
      * @return string
      */
     public static function eraseSavedLines(): string
@@ -223,6 +268,9 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which erases the entire line.
+     * Cursor position does not change.
+     *
      * @return string
      */
     public static function eraseLine(): string
@@ -231,6 +279,7 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which clears from cursor to the end of the line.
      * @return string
      */
     public static function eraseToEndOfLine(): string
@@ -239,6 +288,7 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which clears from the beginning of the line to the cursor position.
      * @return string
      */
     public static function eraseFromStartOfLine(): string
@@ -247,7 +297,7 @@ final class Ansi
     }
 
     /**
-     * New lines are added at the bottom.
+     * Returns ANSI codes which will scroll the screen up by a given amount.
      *
      * @param int $lines
      * @return string
@@ -258,7 +308,7 @@ final class Ansi
     }
 
     /**
-     * New lines are added at the bottom.
+     * Returns ANSI codes which will scroll the screen down by a given amount.
      *
      * @param int $lines
      * @return string
@@ -269,6 +319,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which will reset the style of the output.
+     *
      * @return string
      */
     public static function resetStyle(): string
@@ -277,6 +329,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which sets or unsets `bold` styling.
+     *
      * @param bool $toggle
      * @return string
      */
@@ -286,6 +340,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which sets or unsets `italic` styling.
+     *
      * @param bool $toggle
      * @return string
      */
@@ -295,6 +351,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which sets or unsets `underline` styling.
+     *
      * @param bool $toggle
      * @return string
      */
@@ -304,6 +362,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which sets or unsets `blink` styling.
+     *
      * @param bool $toggle
      * @return string
      */
@@ -313,6 +373,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which applies the given color to the foreground font.
+     *
      * @see https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit
      * @param Color $color
      * @return string
@@ -323,6 +385,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which applies the given color to the background font.
+     *
      * @see https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit
      * @param Color $color
      * @return string
@@ -333,6 +397,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which applies the given color to foreground or background.
+     *
      * @param Sgr $section
      * @param Color $color
      * @return string
@@ -343,6 +409,8 @@ final class Ansi
     }
 
     /**
+     * Returns ANSI codes which gives the device status report.
+
      * @return string
      */
     public static function deviceStatusReport(): string
@@ -351,6 +419,8 @@ final class Ansi
     }
 
     /**
+     * A helper method which will get the terminal size of the current terminal.
+     *
      * @return array{ row: int, column: int }
      */
     public static function getTerminalSize(): array
