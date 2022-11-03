@@ -5,8 +5,6 @@ namespace Tests\SouthPointe\Ansi;
 use InvalidArgumentException;
 use SouthPointe\Ansi\Buffer;
 use SouthPointe\Ansi\Codes\Color;
-use Tests\SouthPointe\Ansi\Helpers\StringableSample;
-use Tests\SouthPointe\Ansi\Helpers\StringEnumSample;
 use function assert;
 use function fread;
 use function fseek;
@@ -18,17 +16,6 @@ class BufferTest extends TestCase
     private function buffer(): Buffer
     {
         return new Buffer();
-    }
-
-    public function test_sequence(): void
-    {
-        $buffer = $this->buffer()->sequence('test', new StringableSample(), StringEnumSample::Case);
-
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals(
-            'test' . 'stringable sample' . 'enum sample',
-            $buffer->toString(),
-        );
     }
 
     public function test_text(): void

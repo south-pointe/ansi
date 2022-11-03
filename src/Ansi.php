@@ -43,7 +43,7 @@ final class Ansi
      * @param string|Stringable|BackedEnum ...$sequences
      * @return string
      */
-    protected static function sequence(string|Stringable|BackedEnum ...$sequences): string
+    public static function sequence(string|Stringable|BackedEnum ...$sequences): string
     {
         $casted = [];
 
@@ -238,7 +238,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which will erase from the cursor to the end of screen.
+     * Returns ANSI codes which will erase from the cursor position to the end of screen.
      *
      * @return string
      */
@@ -269,7 +269,7 @@ final class Ansi
 
     /**
      * Returns ANSI codes which erases the entire line.
-     * Cursor position does not change.
+     * Cursor position will not change.
      *
      * @return string
      */
@@ -279,7 +279,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which clears from cursor to the end of the line.
+     * Returns ANSI codes which erase from cursor position to the end of the line.
      * @return string
      */
     public static function eraseToEndOfLine(): string

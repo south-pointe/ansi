@@ -2,7 +2,6 @@
 
 namespace SouthPointe\Ansi;
 
-use BackedEnum;
 use SouthPointe\Ansi\Codes\Color;
 use Stringable;
 use Webmozart\Assert\Assert;
@@ -18,15 +17,8 @@ final class Buffer implements Stringable
     protected array $buffer = [];
 
     /**
-     * @param string|Stringable|BackedEnum ...$sequences
-     * @return $this
-     */
-    public function sequence(string|Stringable|BackedEnum ...$sequences): self
-    {
-        return $this->buffer(Ansi::sequence(...$sequences));
-    }
-
-    /**
+     * Add text to buffer.
+     *
      * @param string $text
      * @return $this
      */
@@ -36,6 +28,12 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add the following sequences to buffer.
+     * - The given text
+     * - Reset style
+     * - Carriage return
+     * - Line feed
+     *
      * @param string $text
      * @return $this
      */
@@ -45,6 +43,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a bell ringer to buffer.
+     *
      * @return $this
      */
     public function bell(): self
@@ -53,6 +53,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a backspace sequence to buffer.
+     *
      * @return $this
      */
     public function backspace(): self
@@ -61,6 +63,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a tab sequence to buffer.
+     *
      * @return $this
      */
     public function tab(): self
@@ -69,6 +73,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a line feed to buffer.
+     *
      * @return $this
      */
     public function lineFeed(): self
@@ -77,6 +83,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a carriage return to buffer.
+     *
      * @return $this
      */
     public function carriageReturn(): self
@@ -85,6 +93,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will move the cursor up by a given amount.
+     *
      * @param int $cells
      * @return $this
      */
@@ -94,6 +104,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will move the cursor down by a given amount.
+     *
      * @param int $cells
      * @return $this
      */
@@ -103,6 +115,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will move the cursor forward by a given amount.
+     *
      * @param int $cells
      * @return $this
      */
@@ -112,6 +126,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will move the cursor back by a given amount.
+     *
      * @param int $cells
      * @return $this
      */
@@ -121,6 +137,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will move the cursor to the beginning of the next line.
+     *
      * @param int $cells
      * @return $this
      */
@@ -130,6 +148,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a sequences to buffer which will move the cursor to the beginning of the previous line.
+     *
      * @param int $cells
      * @return $this
      */
@@ -139,6 +159,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add a sequences to buffer which will move the cursor to the given position.
+     *
      * @param int $row
      * @param int $column
      * @return $this
@@ -149,6 +171,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase the entire screen.
+     *
      * @return $this
      */
     public function eraseScreen(): self
@@ -157,6 +181,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase from cursor position to the end of screen.
+     *
      * @return $this
      */
     public function eraseToEndOfScreen(): self
@@ -165,6 +191,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase from start of screen to the cursor position.
+     *
      * @return $this
      */
     public function eraseFromStartOfScreen(): self
@@ -173,6 +201,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase all lines saved in the scrollback buffer.
+     *
      * @return $this
      */
     public function eraseSavedLines(): self
@@ -181,6 +211,9 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erases the entire line.
+     * Cursor position will not change.
+     *
      * @return $this
      */
     public function eraseLine(): self
@@ -189,6 +222,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase from cursor position to the end of the line.
+     *
      * @return $this
      */
     public function eraseToEndOfLine(): self
@@ -197,6 +232,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will erase from start of the line to cursor position.
+     *
      * @return $this
      */
     public function eraseFromStartOfLine(): self
@@ -205,6 +242,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will scroll the screen up by a given amount.
+     *
      * @param int $lines
      * @return $this
      */
@@ -214,6 +253,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will scroll the screen down by a given amount.
+     *
      * @param int $lines
      * @return $this
      */
@@ -223,6 +264,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will reset all applied styles.
+     *
      * @return $this
      */
     public function resetStyle(): self
@@ -231,6 +274,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will apply bold styling to succeeding text.
+     *
      * @param bool $toggle
      * @return $this
      */
@@ -240,6 +285,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will apply italic styling to succeeding text.
+     *
      * @param bool $toggle
      * @return $this
      */
@@ -249,6 +296,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will add underline to succeeding text.
+     *
      * @param bool $toggle
      * @return $this
      */
@@ -258,6 +307,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will make succeeding text blink.
+     *
      * @return $this
      */
     public function blink(bool $toggle = true): self
@@ -266,6 +317,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will apply the given color to the foreground on succeeding text.
+     *
      * @return $this
      */
     public function foreground(Color $color): self
@@ -274,6 +327,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add sequences to buffer which will apply the given color to the background on succeeding text.
+     *
      * @param Color $color
      * @return $this
      */
@@ -283,6 +338,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Flush the buffer to the given resource.
+     *
      * @param resource $to
      * @return $this
      */
@@ -294,6 +351,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Clear all buffer.
+     *
      * @return $this
      */
     public function clear(): self
@@ -303,6 +362,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * concat the buffer and output it as string.
+     *
      * @return string
      */
     public function toString(): string
@@ -311,6 +372,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * @see self::toString
+     *
      * @return string
      */
     public function __toString(): string
@@ -319,6 +382,8 @@ final class Buffer implements Stringable
     }
 
     /**
+     * Add the given string to buffer and return itself for convenience.
+     *
      * @param string $string
      * @return $this
      */
