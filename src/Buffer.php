@@ -351,7 +351,7 @@ final class Buffer implements Stringable
     }
 
     /**
-     * Clear all buffer.
+     * Clears all buffer.
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ final class Buffer implements Stringable
     }
 
     /**
-     * concat the buffer and output it as string.
+     * Concatenates the buffer and output it as string.
      *
      * @return string
      */

@@ -187,7 +187,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which moves cursor to the beginning of next line.
+     * Returns ANSI codes which moves cursor to the beginning of line, and move down by the given amount.
      *
      * @param int $cells
      * @return string
@@ -201,7 +201,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which moves cursor to the beginning of previous line.
+     * Returns ANSI codes which moves cursor to the beginning of line, and move up by the given amount.
      *
      * @param int $cells
      * @return string
@@ -288,7 +288,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which clears from the beginning of the line to the cursor position.
+     * Returns ANSI codes which erases from the beginning of the line to the cursor position.
      * @return string
      */
     public static function eraseFromStartOfLine(): string
@@ -329,7 +329,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which sets or unsets `bold` styling.
+     * Returns ANSI codes which applies bold styling to succeeding text.
      *
      * @param bool $toggle
      * @return string
@@ -340,7 +340,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which sets or unsets `italic` styling.
+     * Returns ANSI codes which applies italic styling to succeeding text.
      *
      * @param bool $toggle
      * @return string
@@ -351,7 +351,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which sets or unsets `underline` styling.
+     * Returns ANSI codes which underlines to succeeding text.
      *
      * @param bool $toggle
      * @return string
@@ -362,7 +362,7 @@ final class Ansi
     }
 
     /**
-     * Returns ANSI codes which sets or unsets `blink` styling.
+     * Returns ANSI codes which makes succeeding text blink.
      *
      * @param bool $toggle
      * @return string
