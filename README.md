@@ -77,13 +77,13 @@ All methods in this class are static.
 - `Ansi::cursorDown(int $n = 1): string` Moves the cursor down `$n` rows.
 - `Ansi::cursorForward(int $n = 1): string` Moves the cursor forward `$n` cells.
 - `Ansi::cursorBack(int $n = 1): string` Moves the cursor back `$n` cells.
-- `Ansi::cursorNextLine(int $n = 1): string` Moves the cursor to the start of line and move down by `$n`.
-- `Ansi::cursorPreviousLine(int $n = 1): string` Moves the cursor to the start of line and move up by `$n`.
-- `Ansi::cursorPosition(int $row, int $column): string` Moves the cursor to the specified position.
+- `Ansi::cursorNextLine(int $n = 1): string` Moves cursor to start of line and move down by `$n`.
+- `Ansi::cursorPreviousLine(int $n = 1): string` Moves cursor to the start of line and move up by `$n`.
+- `Ansi::cursorPosition(int $row, int $column): string` Moves cursor to the specified position.
 - `Ansi::eraseScreen(): string` Erases the entire screen.
 - `Ansi::eraseToEndOfScreen(): string` Erases from the cursor position to the end of screen.
 - `Ansi::eraseFromStartOfScreen(): string` Erases from the start of screen to the cursor position.
-- `Ansi::eraseSavedLines(): string` Clears the screen and deletes all lines saved in the scrollback buffer.
+- `Ansi::eraseSavedLines(): string` Clears the screen and deletes all lines in the scrollback buffer.
 - `Ansi::eraseLine(): string` Erases the entire line. Cursor Position will not change.
 - `Ansi::eraseToEndOfLine(): string` Erases from cursor position to the end of the line.
 - `Ansi::eraseFromStartOfLine(): string` Erases from the start of the line to the cursor position.

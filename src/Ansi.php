@@ -410,7 +410,7 @@ final class Ansi
 
     /**
      * Returns ANSI codes which gives the device status report.
-
+     *
      * @return string
      */
     public static function deviceStatusReport(): string
