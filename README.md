@@ -97,7 +97,7 @@ All methods in this class are static.
 `Ansi::underline(bool $toggle = true): string` Underlines to succeeding text.  
 `Ansi::blink(bool $toggle = true): string` Makes succeeding text blink.  
 `Ansi::foreground(Color $color): string` Applies the given color to the foreground font.  
-`Ansi::foreground(Color $color): string` Applies the given color to the background font.
+`Ansi::foreground(Color $color): string` Applies the given color to the background font.  
 `Ansi::deviceStatusReport(): string` Gives the device status report.  
 `Ansi::getTerminalSize(): array{ row: int, column: int }` Get the terminal size of the current terminal.  
 
@@ -106,10 +106,10 @@ All methods in this class are static.
 This class should be instantiated by calling `Ansi::buffer()`.  
 Buffered class contains all methods in `Ansi` class except `getTerminalSize`.  
 
-`Buffer::text(string $text): self` Adds text to buffer.
+`Buffer::text(string $text): self` Adds text to buffer.  
 `Buffer::flush(resource $to): self` Flushes all sequences buffered to the given resource.  
 `Buffer::clear(): self` Clears all sequences stored in the buffer.  
-`Buffer::toString(): string` Coverts all buffered sequences to string.
+`Buffer::toString(): string` Coverts all buffered sequences to string.  
 
 ### Color
 
