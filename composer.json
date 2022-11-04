@@ -1,5 +1,5 @@
 {
-  "name": "taka-oyama/ansi-php",
+  "name": "south-pointe/ansi",
   "description": "Library for creating ANSI escape codes in PHP",
   "type": "library",
   "license": "MIT",
