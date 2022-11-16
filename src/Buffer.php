@@ -338,32 +338,6 @@ final class Buffer implements Stringable
     }
 
     /**
-     * Add sequences to buffer which will apply the given RGB color to the foreground on succeeding text.
-     *
-     * @param int $r
-     * @param int $g
-     * @param int $b
-     * @return $this
-     */
-    public function foregroundRgb(int $r, int $g, int $b): self
-    {
-        return $this->buffer(Ansi::foregroundRgb($r, $g, $b));
-    }
-
-    /**
-     * Add sequences to buffer which will apply the given RGB color to the background on succeeding text.
-     *
-     * @param int $r
-     * @param int $g
-     * @param int $b
-     * @return $this
-     */
-    public function backgroundRgb(int $r, int $g, int $b): self
-    {
-        return $this->buffer(Ansi::backgroundRgb($r, $g, $b));
-    }
-
-    /**
      * Flush the buffer to the given resource.
      *
      * @param resource $to

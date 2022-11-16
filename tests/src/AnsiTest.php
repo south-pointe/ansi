@@ -243,58 +243,6 @@ class AnsiTest extends TestCase
         self::assertEquals("\e[48;5;9m", Ansi::backgroundColor(Color::Red));
     }
 
-    public function test_foregroundRgb(): void
-    {
-        self::assertEquals("\e[38;2;255;255;255m", Ansi::foregroundRgb(255, 255, 255));
-    }
-
-    public function test_foregroundRgb_out_of_range_r(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::foregroundRgb(256, 255, 255);
-    }
-
-    public function test_foregroundRgb_out_of_range_g(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::foregroundRgb(255, 256, 255);
-    }
-
-    public function test_foregroundRgb_out_of_range_b(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::foregroundRgb(255, 255, 256);
-    }
-
-    public function test_backgroundRgb(): void
-    {
-        self::assertEquals("\e[48;2;255;255;255m", Ansi::backgroundRgb(255, 255, 255));
-    }
-
-    public function test_backgroundRgb_out_of_range_r(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::backgroundRgb(256, 255, 255);
-    }
-
-    public function test_backgroundRgb_out_of_range_g(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::backgroundRgb(255, 256, 255);
-    }
-
-    public function test_backgroundRgb_out_of_range_b(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
-        Ansi::backgroundRgb(255, 255, 256);
-    }
-
     public function test_deviceStatusReport(): void
     {
         self::assertEquals("\e[6n", Ansi::deviceStatusReport());

@@ -258,22 +258,6 @@ class BufferTest extends TestCase
         self::assertEquals("\e[48;5;9m", $buffer->toString());
     }
 
-    public function test_foregroundRgb(): void
-    {
-        $buffer = $this->buffer()->foregroundRgb(255, 255, 255);
-
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[38;2;255;255;255m", $buffer->toString());
-    }
-
-    public function test_backgroundRgb(): void
-    {
-        $buffer = $this->buffer()->backgroundRgb(255, 255, 255);
-
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[48;2;255;255;255m", $buffer->toString());
-    }
-
     public function test_clear(): void
     {
         $buffer = $this->buffer()
