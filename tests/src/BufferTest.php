@@ -244,7 +244,7 @@ class BufferTest extends TestCase
 
     public function test_foregroundColor(): void
     {
-        $buffer = $this->buffer()->foregroundColor(Color::Red);
+        $buffer = $this->buffer()->fgColor(Color::Red);
 
         self::assertInstanceOf(Buffer::class, $buffer);
         self::assertEquals("\e[38;5;9m", $buffer->toString());
@@ -252,7 +252,7 @@ class BufferTest extends TestCase
 
     public function test_backgroundColor(): void
     {
-        $buffer = $this->buffer()->backgroundColor(Color::Red);
+        $buffer = $this->buffer()->bgColor(Color::Red);
 
         self::assertInstanceOf(Buffer::class, $buffer);
         self::assertEquals("\e[48;5;9m", $buffer->toString());

@@ -31,13 +31,10 @@ use SouthPointe\Ansi\Ansi;
 use SouthPointe\Ansi\Codes\Color;
 
 // Change foreground text to blue.
-echo Ansi::foregroundColor(Color::Blue);
+echo Ansi::fgColor(Color::Blue);
 
 // Set color by 256-color mode.
-echo Ansi::foregroundColor(Color::code(12));
-
-// Set color using RGB Color.
-echo Ansi::foregroundRgb(255, 255, 255);
+echo Ansi::fgColor(Color::code(12));
 
 // Move the cursor back by 2.
 echo Ansi::cursorBack(2);
@@ -48,7 +45,7 @@ echo Ansi::line('test');
 // Ansi::buffer() will allow you to chain multiple sequences.
 echo Ansi::buffer()
     ->bold()
-    ->foregroundColor(Color::Gray)
+    ->fgColor(Color::Gray)
     ->text('foo bar')
     ->resetStyle()
     ->toString();

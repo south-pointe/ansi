@@ -379,7 +379,7 @@ final class Ansi
      * @param Color $color
      * @return string
      */
-    public static function foregroundColor(Color $color): string
+    public static function fgColor(Color $color): string
     {
         return self::color(Sgr::SetForegroundColor, $color);
     }
@@ -391,7 +391,7 @@ final class Ansi
      * @param Color $color
      * @return string
      */
-    public static function backgroundColor(Color $color): string
+    public static function bgColor(Color $color): string
     {
         return self::color(Sgr::SetBackgroundColor, $color);
     }

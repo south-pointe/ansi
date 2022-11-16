@@ -321,9 +321,9 @@ final class Buffer implements Stringable
      *
      * @return $this
      */
-    public function foregroundColor(Color $color): self
+    public function fgColor(Color $color): self
     {
-        return $this->buffer(Ansi::foregroundColor($color));
+        return $this->buffer(Ansi::fgColor($color));
     }
 
     /**
@@ -332,9 +332,9 @@ final class Buffer implements Stringable
      * @param Color $color
      * @return $this
      */
-    public function backgroundColor(Color $color): self
+    public function bgColor(Color $color): self
     {
-        return $this->buffer(Ansi::backgroundColor($color));
+        return $this->buffer(Ansi::bgColor($color));
     }
 
     /**

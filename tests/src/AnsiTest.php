@@ -235,12 +235,12 @@ class AnsiTest extends TestCase
 
     public function test_foregroundColor(): void
     {
-        self::assertEquals("\e[38;5;9m", Ansi::foregroundColor(Color::Red));
+        self::assertEquals("\e[38;5;9m", Ansi::fgColor(Color::Red));
     }
 
     public function test_backgroundColor(): void
     {
-        self::assertEquals("\e[48;5;9m", Ansi::backgroundColor(Color::Red));
+        self::assertEquals("\e[48;5;9m", Ansi::bgColor(Color::Red));
     }
 
     public function test_deviceStatusReport(): void
