@@ -48,7 +48,7 @@ echo Ansi::line('test');
 // Ansi::buffer() will allow you to chain multiple sequences.
 echo Ansi::buffer()
     ->bold()
-    ->foreground(Color::Gray)
+    ->foregroundColor(Color::Gray)
     ->text('foo bar')
     ->resetStyle()
     ->toString();
