@@ -31,10 +31,13 @@ use SouthPointe\Ansi\Ansi;
 use SouthPointe\Ansi\Codes\Color;
 
 // Change foreground text to blue.
-echo Ansi::foreground(Color::Blue);
+echo Ansi::foregroundColor(Color::Blue);
 
-// You can also set color by 256-color mode.
-echo Ansi::foreground(Color::code(12));
+// Set color by 256-color mode.
+echo Ansi::foregroundColor(Color::code(12));
+
+// Set color using RGB Color.
+echo Ansi::foregroundRgb(255, 255, 255);
 
 // Move the cursor back by 2.
 echo Ansi::cursorBack(2);

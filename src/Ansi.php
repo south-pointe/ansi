@@ -379,7 +379,7 @@ final class Ansi
      * @param Color $color
      * @return string
      */
-    public static function foreground(Color $color): string
+    public static function foregroundColor(Color $color): string
     {
         return self::color(Sgr::SetForegroundColor, $color);
     }
@@ -391,7 +391,7 @@ final class Ansi
      * @param Color $color
      * @return string
      */
-    public static function background(Color $color): string
+    public static function backgroundColor(Color $color): string
     {
         return self::color(Sgr::SetBackgroundColor, $color);
     }
@@ -405,7 +405,50 @@ final class Ansi
      */
     protected static function color(Sgr $section, Color $color): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, $section, $color, Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::CSI, $section, ';5;', $color, Csi::Sgr);
+    }
+
+    /**
+     * Returns ANSI codes which applies the given rgb color to the foreground font.
+     *
+     * @param int $r
+     * @param int $g
+     * @param int $b
+     * @return string
+     */
+    public static function foregroundRgb(int $r, int $g, int $b): string
+    {
+        return self::rgb(Sgr::SetForegroundColor, $r, $g, $b);
+    }
+
+    /**
+     * Returns ANSI codes which applies the given rgb color to the background font.
+     *
+     * @param int $r
+     * @param int $g
+     * @param int $b
+     * @return string
+     */
+    public static function backgroundRgb(int $r, int $g, int $b): string
+    {
+        return self::rgb(Sgr::SetBackgroundColor, $r, $g, $b);
+    }
+
+    /**
+     * Returns ANSI codes which applies the given color to foreground or background.
+     *
+     * @param Sgr $section
+     * @param int $r
+     * @param int $g
+     * @param int $b
+     * @return string
+     */
+    protected static function rgb(Sgr $section, int $r, int $g, int $b): string
+    {
+        Assert::range($r, 0, 255);
+        Assert::range($g, 0, 255);
+        Assert::range($b, 0, 255);
+        return self::sequence(C0::Escape, Fe::CSI, $section, ";2;{$r};{$g};{$b}", Csi::Sgr);
     }
 
     /**

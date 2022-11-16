@@ -233,14 +233,66 @@ class AnsiTest extends TestCase
         self::assertEquals("\e[25m", Ansi::blink(false));
     }
 
-    public function test_foreground(): void
+    public function test_foregroundColor(): void
     {
-        self::assertEquals("\e[38;5;9m", Ansi::foreground(Color::Red));
+        self::assertEquals("\e[38;5;9m", Ansi::foregroundColor(Color::Red));
     }
 
-    public function test_background(): void
+    public function test_backgroundColor(): void
     {
-        self::assertEquals("\e[48;5;9m", Ansi::background(Color::Red));
+        self::assertEquals("\e[48;5;9m", Ansi::backgroundColor(Color::Red));
+    }
+
+    public function test_foregroundRgb(): void
+    {
+        self::assertEquals("\e[38;2;255;255;255m", Ansi::foregroundRgb(255, 255, 255));
+    }
+
+    public function test_foregroundRgb_out_of_range_r(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::foregroundRgb(256, 255, 255);
+    }
+
+    public function test_foregroundRgb_out_of_range_g(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::foregroundRgb(255, 256, 255);
+    }
+
+    public function test_foregroundRgb_out_of_range_b(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::foregroundRgb(255, 255, 256);
+    }
+
+    public function test_backgroundRgb(): void
+    {
+        self::assertEquals("\e[48;2;255;255;255m", Ansi::backgroundRgb(255, 255, 255));
+    }
+
+    public function test_backgroundRgb_out_of_range_r(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::backgroundRgb(256, 255, 255);
+    }
+
+    public function test_backgroundRgb_out_of_range_g(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::backgroundRgb(255, 256, 255);
+    }
+
+    public function test_backgroundRgb_out_of_range_b(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Expected a value between 0 and 255. Got: 256');
+        Ansi::backgroundRgb(255, 255, 256);
     }
 
     public function test_deviceStatusReport(): void

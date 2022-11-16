@@ -13,6 +13,6 @@ enum Sgr: string
     case NotItalic = '23';
     case NotUnderlined = '24';
     case NotBlinking = '25';
-    case SetForegroundColor = '38;5;';
-    case SetBackgroundColor = '48;5;';
+    case SetForegroundColor = '38';
+    case SetBackgroundColor = '48';
 }
