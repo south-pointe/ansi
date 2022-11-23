@@ -338,7 +338,7 @@ final class Buffer implements Stringable
     }
 
     /**
-     * Flush the buffer to the given resource.
+     * Flushes the buffer to the given resource.
      *
      * @param resource|null $to
      * [Optional] Defaults to php://stdout if null.
