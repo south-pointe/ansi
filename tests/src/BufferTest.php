@@ -2,7 +2,7 @@
 
 namespace Tests\SouthPointe\Ansi;
 
-use InvalidArgumentException;
+use AssertionError;
 use SouthPointe\Ansi\Buffer;
 use SouthPointe\Ansi\Codes\Color;
 use function assert;
@@ -282,8 +282,8 @@ class BufferTest extends TestCase
 
     public function test_flush_non_resource(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a resource. Got: integer');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('assert(is_resource($to))');
         $this->buffer()->flush(1);
     }
 
