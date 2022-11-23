@@ -4,10 +4,10 @@ namespace SouthPointe\Ansi;
 
 use SouthPointe\Ansi\Codes\Color;
 use Stringable;
-use Webmozart\Assert\Assert;
+use function fopen;
 use function fwrite;
 use function implode;
-use const STDOUT;
+use function is_resource;
 
 final class Buffer implements Stringable
 {
@@ -340,12 +340,14 @@ final class Buffer implements Stringable
     /**
      * Flush the buffer to the given resource.
      *
-     * @param resource $to
+     * @param resource|null $to
+     * [Optional] Defaults to php://stdout if null.
      * @return $this
      */
-    public function flush(mixed $to = STDOUT): self
+    public function flush(mixed $to = null): self
     {
-        Assert::resource($to);
+        $to ??= fopen('php://stdout', 'w');
+        assert(is_resource($to));
         fwrite($to, $this->toString());
         return $this->clear();
     }

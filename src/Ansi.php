@@ -15,6 +15,7 @@ use Stringable;
 use Webmozart\Assert\Assert;
 use function assert;
 use function compact;
+use function fopen;
 use function fread;
 use function fwrite;
 use function implode;
@@ -23,8 +24,6 @@ use function shell_exec;
 use function sscanf;
 use function system;
 use function trim;
-use const STDIN;
-use const STDOUT;
 
 final class Ansi
 {
@@ -427,16 +426,18 @@ final class Ansi
     {
         self::assertCliMode(__METHOD__);
 
+        $stdout = self::getStdout();
+
         $current = self::captureDeviceStatusReport();
 
         // Move as far away as it can to determine the max cursor position.
-        fwrite(STDOUT, self::cursorPosition(9999, 9999));
+        fwrite($stdout, self::cursorPosition(9999, 9999));
 
         // get the max position which is the size of the terminal.
         $size = self::captureDeviceStatusReport();
 
         // Restore cursor position.
-        fwrite(STDOUT, self::cursorPosition(...$current));
+        fwrite($stdout, self::cursorPosition(...$current));
 
         return $size;
     }
@@ -453,14 +454,35 @@ final class Ansi
         system("stty -icanon -echo");
 
         try {
-            fwrite(STDOUT, self::deviceStatusReport());
-            $code = trim((string) fread(STDIN, 100));
+            $stdout = self::getStdout();
+            fwrite($stdout, self::deviceStatusReport());
+            $code = trim((string) fread(self::getStdin(), 100));
             sscanf($code, "\e[%d;%dR", $row, $column);
             return compact('row', 'column');
         }
         finally {
             system("stty $stty");
         }
+    }
+
+    /**
+     * @return resource
+     */
+    private static function getStdout(): mixed
+    {
+        $stdout = fopen('php://stdout', 'w');
+        assert($stdout !== false);
+        return $stdout;
+    }
+
+    /**
+     * @return resource
+     */
+    private static function getStdin(): mixed
+    {
+        $stdin = fopen('php://stdin', 'r');
+        assert($stdin !== false);
+        return $stdin;
     }
 
     /**
