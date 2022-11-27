@@ -29,6 +29,7 @@ final class Ansi
 {
     /**
      * Returns a similar ANSI instance which can be used to chain several sequences.
+     * 
      * @return Buffer
      */
     public static function buffer(): Buffer
