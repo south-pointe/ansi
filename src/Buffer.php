@@ -4,12 +4,9 @@ namespace SouthPointe\Ansi;
 
 use SouthPointe\Ansi\Codes\Color;
 use Stringable;
-use function fopen;
-use function fwrite;
 use function implode;
-use function is_resource;
 
-final class Buffer implements Stringable
+class Buffer implements Stringable
 {
     /**
      * @var list<string>
@@ -335,21 +332,6 @@ final class Buffer implements Stringable
     public function bgColor(Color $color): self
     {
         return $this->buffer(Ansi::bgColor($color));
-    }
-
-    /**
-     * Flushes the buffer to the given resource.
-     *
-     * @param resource|null $to
-     * [Optional] Defaults to php://stdout if null.
-     * @return $this
-     */
-    public function flush(mixed $to = null): self
-    {
-        $to ??= fopen('php://stdout', 'w');
-        assert(is_resource($to));
-        fwrite($to, $this->toString());
-        return $this->clear();
     }
 
     /**

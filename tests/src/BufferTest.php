@@ -2,14 +2,8 @@
 
 namespace Tests\SouthPointe\Ansi;
 
-use AssertionError;
 use SouthPointe\Ansi\Buffer;
 use SouthPointe\Ansi\Codes\Color;
-use function assert;
-use function fread;
-use function fseek;
-use function is_resource;
-use function tmpfile;
 
 class BufferTest extends TestCase
 {
@@ -266,25 +260,6 @@ class BufferTest extends TestCase
 
         self::assertInstanceOf(Buffer::class, $buffer);
         self::assertEquals('', $buffer->toString());
-    }
-
-    public function test_flush(): void
-    {
-        $temp = tmpfile();
-        assert(is_resource($temp));
-
-        $buffer = $this->buffer()->text('1')->flush($temp);
-        fseek($temp, 0);
-
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals('1', fread($temp, 10));
-    }
-
-    public function test_flush_non_resource(): void
-    {
-        $this->expectException(AssertionError::class);
-        $this->expectExceptionMessage('assert(is_resource($to))');
-        $this->buffer()->flush(1);
     }
 
     public function test_toString(): void

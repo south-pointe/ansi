@@ -28,7 +28,18 @@ use function trim;
 final class Ansi
 {
     /**
-     * Returns a similar ANSI instance which can be used to chain several sequences.
+     * Returns a buffered stream that can flush to a given resource.
+     *
+     * @param resource $stream
+     * @return Stream
+     */
+    public static function stream(mixed $stream): Stream
+    {
+        return new Stream($stream);
+    }
+
+    /**
+     * Returns a buffer-able instance which can be used to chain sequences.
      * 
      * @return Buffer
      */
