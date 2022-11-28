@@ -50,10 +50,15 @@ echo Ansi::buffer()
     ->resetStyle()
     ->toString();
 
-// Will send the string to STDOUT
-echo Ansi::buffer()
-    ->resetStyle()
-    ->flush(STDOUT);
+// Will send the string to STDOUT (default stream uri)
+echo Ansi::stream()
+    ->text('to stdout')
+    ->flush();
+
+// Will send the string to STDERR
+echo Ansi::stream(STDERR)
+    ->bgColor(Color::Red)
+    ->flush();
 
 // Returns the size of the terminal as ['row' => int, 'column' => int].
 echo Ansi::getTerminalSize();

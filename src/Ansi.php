@@ -30,10 +30,10 @@ final class Ansi
     /**
      * Returns a buffered stream that can flush to a given resource.
      *
-     * @param resource $stream
+     * @param resource|null $stream
      * @return Stream
      */
-    public static function stream(mixed $stream): Stream
+    public static function stream(mixed $stream = null): Stream
     {
         return new Stream($stream);
     }
