@@ -252,6 +252,18 @@ class BufferTest extends TestCase
         self::assertEquals("\e[48;5;9m", $buffer->toString());
     }
 
+    public function test_extract(): void
+    {
+        $buffer = $this->buffer();
+
+        $string = $buffer
+            ->text('1')
+            ->extract();
+
+        self::assertSame('1', $string);
+        self::assertEquals('', $buffer->toString());
+    }
+
     public function test_clear(): void
     {
         $buffer = $this->buffer()

@@ -335,6 +335,18 @@ class Buffer implements Stringable
     }
 
     /**
+     * Concatenates the buffer and output it as string and clear the buffer.
+     *
+     * @return string
+     */
+    public function extract(): string
+    {
+        $concat = $this->toString();
+        $this->clear();
+        return $concat;
+    }
+
+    /**
      * Clears all buffer.
      *
      * @return $this
