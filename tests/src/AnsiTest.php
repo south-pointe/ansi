@@ -10,7 +10,6 @@ use SouthPointe\Ansi\Stream;
 use Tests\SouthPointe\Ansi\Helpers\IntEnumSample;
 use Tests\SouthPointe\Ansi\Helpers\StringableSample;
 use Tests\SouthPointe\Ansi\Helpers\StringEnumSample;
-use function dump;
 use const STDOUT;
 
 class AnsiTest extends TestCase
