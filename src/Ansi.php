@@ -151,7 +151,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::up($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::up($cells))
             : '';
     }
 
@@ -165,7 +165,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::down($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::down($cells))
             : '';
     }
 
@@ -179,7 +179,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::forward($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::forward($cells))
             : '';
     }
 
@@ -193,7 +193,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::back($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::back($cells))
             : '';
     }
 
@@ -207,7 +207,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::nextLine($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::nextLine($cells))
             : '';
     }
 
@@ -221,7 +221,7 @@ final class Ansi
     {
         Assert::greaterThanEq($cells, 0);
         return $cells > 0
-            ? self::sequence(C0::Escape, Fe::CSI, Cursor::prevLine($cells))
+            ? self::sequence(C0::Escape, Fe::Csi, Cursor::prevLine($cells))
             : '';
     }
 
@@ -235,7 +235,7 @@ final class Ansi
      */
     public static function cursorPosition(int $row, int $column): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Cursor::position($row, $column));
+        return self::sequence(C0::Escape, Fe::Csi, Cursor::position($row, $column));
     }
 
     /**
@@ -245,7 +245,7 @@ final class Ansi
      */
     public static function eraseScreen(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::screen());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::screen());
     }
 
     /**
@@ -255,7 +255,7 @@ final class Ansi
      */
     public static function eraseToEndOfScreen(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::toEndOfScreen());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::toEndOfScreen());
     }
 
     /**
@@ -265,7 +265,7 @@ final class Ansi
      */
     public static function eraseFromStartOfScreen(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::fromStartOfScreen());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::fromStartOfScreen());
     }
 
     /**
@@ -275,7 +275,7 @@ final class Ansi
      */
     public static function eraseSavedLines(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::savedLines());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::savedLines());
     }
 
     /**
@@ -286,7 +286,7 @@ final class Ansi
      */
     public static function eraseLine(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::line());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::line());
     }
 
     /**
@@ -295,7 +295,7 @@ final class Ansi
      */
     public static function eraseToEndOfLine(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::toEndOfLine());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::toEndOfLine());
     }
 
     /**
@@ -304,7 +304,7 @@ final class Ansi
      */
     public static function eraseFromStartOfLine(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Erase::fromStartOfLine());
+        return self::sequence(C0::Escape, Fe::Csi, Erase::fromStartOfLine());
     }
 
     /**
@@ -315,7 +315,7 @@ final class Ansi
      */
     public static function scrollUp(int $lines = 1): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Scroll::up($lines));
+        return self::sequence(C0::Escape, Fe::Csi, Scroll::up($lines));
     }
 
     /**
@@ -326,7 +326,7 @@ final class Ansi
      */
     public static function scrollDown(int $lines = 1): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Scroll::down($lines));
+        return self::sequence(C0::Escape, Fe::Csi, Scroll::down($lines));
     }
 
     /**
@@ -336,7 +336,7 @@ final class Ansi
      */
     public static function resetStyle(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Sgr::Reset, Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, Sgr::Reset, Csi::Sgr);
     }
 
     /**
@@ -347,7 +347,7 @@ final class Ansi
      */
     public static function bold(bool $toggle = true): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, ($toggle ? Sgr::Bold : Sgr::NormalIntensity), Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, ($toggle ? Sgr::Bold : Sgr::NormalIntensity), Csi::Sgr);
     }
 
     /**
@@ -358,7 +358,7 @@ final class Ansi
      */
     public static function italic(bool $toggle = true): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, ($toggle ? Sgr::Italic : Sgr::NotItalic), Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, ($toggle ? Sgr::Italic : Sgr::NotItalic), Csi::Sgr);
     }
 
     /**
@@ -369,7 +369,7 @@ final class Ansi
      */
     public static function underline(bool $toggle = true): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, ($toggle ? Sgr::Underline : Sgr::NotUnderlined), Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, ($toggle ? Sgr::Underline : Sgr::NotUnderlined), Csi::Sgr);
     }
 
     /**
@@ -380,7 +380,7 @@ final class Ansi
      */
     public static function blink(bool $toggle = true): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, ($toggle ? Sgr::Blink : Sgr::NotBlinking), Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, ($toggle ? Sgr::Blink : Sgr::NotBlinking), Csi::Sgr);
     }
 
     /**
@@ -416,7 +416,7 @@ final class Ansi
      */
     protected static function color(Sgr $section, Color $color): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, $section, ';5;', $color, Csi::Sgr);
+        return self::sequence(C0::Escape, Fe::Csi, $section, ';5;', $color, Csi::Sgr);
     }
 
     /**
@@ -426,7 +426,7 @@ final class Ansi
      */
     public static function deviceStatusReport(): string
     {
-        return self::sequence(C0::Escape, Fe::CSI, Csi::DeviceStatusReport);
+        return self::sequence(C0::Escape, Fe::Csi, Csi::DeviceStatusReport);
     }
 
     /**

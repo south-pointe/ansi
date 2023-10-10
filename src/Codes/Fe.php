@@ -4,5 +4,5 @@ namespace SouthPointe\Ansi\Codes;
 
 enum Fe: string
 {
-    case CSI = '[';
+    case Csi = '[';
 }
