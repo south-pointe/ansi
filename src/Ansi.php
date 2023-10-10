@@ -470,7 +470,10 @@ final class Ansi
             fwrite($stdout, self::deviceStatusReport());
             $code = trim((string) fread(self::getStdin(), 100));
             sscanf($code, "\e[%d;%dR", $row, $column);
-            return compact('row', 'column');
+            return [
+                'row' => (int) $row,
+                'column' => (int) $column,
+            ];
         }
         finally {
             system("stty $stty");
