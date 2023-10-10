@@ -25,10 +25,7 @@
   "config": {
     "discard-changes": true,
     "preferred-install": "dist",
-    "sort-packages": true,
-    "allow-plugins": {
-      "phpstan/extension-installer": true
-    }
+    "sort-packages": true
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
