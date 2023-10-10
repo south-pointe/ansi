@@ -2,7 +2,7 @@
 
 namespace Tests\SouthPointe\Ansi\Codes;
 
-use InvalidArgumentException;
+use AssertionError;
 use SouthPointe\Ansi\Codes\Color;
 use Tests\SouthPointe\Ansi\TestCase;
 
@@ -17,8 +17,8 @@ class ColorTest extends TestCase
 
     public function test_code_out_of_bound(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected the key 256 to exist.');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage("Expected code: 256 to exist.");
         Color::code(256);
     }
 }

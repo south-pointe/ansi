@@ -2,17 +2,24 @@
 
 namespace Tests\SouthPointe\Ansi;
 
-use InvalidArgumentException;
+use AssertionError;
 use SouthPointe\Ansi\Ansi;
 use SouthPointe\Ansi\Buffer;
 use SouthPointe\Ansi\Codes\Color;
+use SouthPointe\Ansi\Stream;
 use Tests\SouthPointe\Ansi\Helpers\IntEnumSample;
 use Tests\SouthPointe\Ansi\Helpers\StringableSample;
 use Tests\SouthPointe\Ansi\Helpers\StringEnumSample;
+use function dump;
 use const STDOUT;
 
 class AnsiTest extends TestCase
 {
+    public function test_stream(): void
+    {
+        self::assertInstanceOf(Stream::class, Ansi::stream());
+    }
+
     public function test_buffer(): void
     {
         self::assertInstanceOf(Buffer::class, Ansi::buffer());
@@ -28,8 +35,8 @@ class AnsiTest extends TestCase
 
     public function test_sequence_with_IntBackedEnum(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a string. Got: integer');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('Expected a string. Got: 1.');
         Ansi::sequence(IntEnumSample::Case);
     }
 
@@ -73,8 +80,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorUp_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorUp(-1);
     }
 
@@ -87,8 +94,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorDown_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorDown(-1);
     }
 
@@ -101,8 +108,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorForward_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorForward(-1);
     }
 
@@ -115,8 +122,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorBack_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorBack(-1);
     }
 
@@ -129,8 +136,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorNextLine_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorNextLine(-1);
     }
 
@@ -143,8 +150,8 @@ class AnsiTest extends TestCase
 
     public function test_cursorPreviousLine_with_negative_cells(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Expected a value greater than or equal to 0. Got: -1');
+        $this->expectException(AssertionError::class);
+        $this->expectExceptionMessage('$cells must be >= 0. Got -1.');
         Ansi::cursorPreviousLine(-1);
     }
 

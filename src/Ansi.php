@@ -14,11 +14,11 @@ use SouthPointe\Ansi\Codes\Sgr;
 use Stringable;
 use Webmozart\Assert\Assert;
 use function assert;
-use function compact;
 use function fopen;
 use function fread;
 use function fwrite;
 use function implode;
+use function is_string;
 use function php_sapi_name;
 use function shell_exec;
 use function sscanf;
@@ -64,7 +64,7 @@ final class Ansi
                 $sequence instanceof Stringable => $sequence->__toString(),
                 default => $sequence,
             };
-            Assert::string($string);
+            assert(is_string($string), "Expected a string. Got: {$string}.");
             $casted[] = $string;
         }
 
@@ -149,7 +149,7 @@ final class Ansi
      */
     public static function cursorUp(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::up($cells))
             : '';
@@ -163,7 +163,7 @@ final class Ansi
      */
     public static function cursorDown(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::down($cells))
             : '';
@@ -177,7 +177,7 @@ final class Ansi
      */
     public static function cursorForward(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::forward($cells))
             : '';
@@ -191,7 +191,7 @@ final class Ansi
      */
     public static function cursorBack(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::back($cells))
             : '';
@@ -205,10 +205,11 @@ final class Ansi
      */
     public static function cursorNextLine(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::nextLine($cells))
             : '';
+
     }
 
     /**
@@ -219,7 +220,7 @@ final class Ansi
      */
     public static function cursorPreviousLine(int $cells = 1): string
     {
-        Assert::greaterThanEq($cells, 0);
+        assert($cells >= 0, '$cells must be >= 0. Got ' . $cells . '.');
         return $cells > 0
             ? self::sequence(C0::Escape, Fe::Csi, Cursor::prevLine($cells))
             : '';

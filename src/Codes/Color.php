@@ -2,7 +2,7 @@
 
 namespace SouthPointe\Ansi\Codes;
 
-use Webmozart\Assert\Assert;
+use function array_key_exists;
 
 enum Color: string
 {
@@ -277,7 +277,7 @@ enum Color: string
             }
         }
 
-        Assert::keyExists($mapped, $code);
+        assert(array_key_exists($code, $mapped), "Expected code: {$code} to exist.");
 
         return $mapped[$code];
     }
