@@ -31,8 +31,8 @@ class StreamTest extends TestCase
             ->text('1')
             ->clear();
 
-        self::assertInstanceOf(Stream::class, $buffer);
-        self::assertEquals('', $buffer->toString());
+        $this->assertInstanceOf(Stream::class, $buffer);
+        $this->assertSame('', $buffer->toString());
     }
 
     public function test_flush(): void
@@ -43,8 +43,8 @@ class StreamTest extends TestCase
         $buffer = $this->stream($temp)->text('1')->flush();
         fseek($temp, 0);
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals('1', fread($temp, 10));
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame('1', fread($temp, 10));
     }
 
     public function test_flush_non_resource(): void

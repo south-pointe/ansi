@@ -12,7 +12,7 @@ class ColorTest extends TestCase
     {
         $color = Color::code(0);
 
-        self::assertEquals(Color::Black, $color);
+        $this->assertSame(Color::Black, $color);
     }
 
     public function test_code_out_of_bound(): void

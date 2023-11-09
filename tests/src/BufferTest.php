@@ -16,240 +16,240 @@ class BufferTest extends TestCase
     {
         $buffer = $this->buffer()->text('test text');
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals('test text', $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame('test text', $buffer->toString());
     }
 
     public function test_line(): void
     {
         $buffer = $this->buffer()->line('t');
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("t\e[0m\r\n", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("t\e[0m\r\n", $buffer->toString());
     }
 
     public function test_bell(): void
     {
         $buffer = $this->buffer()->bell();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\x07", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\x07", $buffer->toString());
     }
 
     public function test_backspace(): void
     {
         $buffer = $this->buffer()->backspace();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\x08", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\x08", $buffer->toString());
     }
 
     public function test_tab(): void
     {
         $buffer = $this->buffer()->tab();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\t", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\t", $buffer->toString());
     }
 
     public function test_lineFeed(): void
     {
         $buffer = $this->buffer()->lineFeed();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\n", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\n", $buffer->toString());
     }
 
     public function test_carriageReturn(): void
     {
         $buffer = $this->buffer()->carriageReturn();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\r", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\r", $buffer->toString());
     }
 
     public function test_cursorUp(): void
     {
         $buffer = $this->buffer()->cursorUp();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1A", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1A", $buffer->toString());
     }
 
     public function test_cursorDown(): void
     {
         $buffer = $this->buffer()->cursorDown();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1B", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1B", $buffer->toString());
     }
 
     public function test_cursorForward(): void
     {
         $buffer = $this->buffer()->cursorForward();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1C", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1C", $buffer->toString());
     }
 
     public function test_cursorBack(): void
     {
         $buffer = $this->buffer()->cursorBack();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1D", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1D", $buffer->toString());
     }
 
     public function test_cursorNextLine(): void
     {
         $buffer = $this->buffer()->cursorNextLine();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1E", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1E", $buffer->toString());
     }
 
     public function test_cursorPreviousLine(): void
     {
         $buffer = $this->buffer()->cursorPreviousLine();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1F", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1F", $buffer->toString());
     }
 
     public function test_cursorPosition(): void
     {
         $buffer = $this->buffer()->cursorPosition(1, 2);
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1;2H", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1;2H", $buffer->toString());
     }
 
     public function test_eraseScreen(): void
     {
         $buffer = $this->buffer()->eraseScreen();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[2J", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[2J", $buffer->toString());
     }
 
     public function test_eraseToEndOfScreen(): void
     {
         $buffer = $this->buffer()->eraseToEndOfScreen();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[0J", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[0J", $buffer->toString());
     }
 
     public function test_eraseFromStartOfScreen(): void
     {
         $buffer = $this->buffer()->eraseFromStartOfScreen();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1J", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1J", $buffer->toString());
     }
 
     public function test_eraseSavedLines(): void
     {
         $buffer = $this->buffer()->eraseSavedLines();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[3J", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[3J", $buffer->toString());
     }
 
     public function test_eraseLine(): void
     {
         $buffer = $this->buffer()->eraseLine();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[2K", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[2K", $buffer->toString());
     }
 
     public function test_eraseToEndOfLine(): void
     {
         $buffer = $this->buffer()->eraseToEndOfLine();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[0K", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[0K", $buffer->toString());
     }
 
     public function test_eraseFromStartOfLine(): void
     {
         $buffer = $this->buffer()->eraseFromStartOfLine();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1K", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1K", $buffer->toString());
     }
 
     public function test_scrollUp(): void
     {
         $buffer = $this->buffer()->scrollUp();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1S", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1S", $buffer->toString());
     }
 
     public function test_scrollDown(): void
     {
         $buffer = $this->buffer()->scrollDown();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1T", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1T", $buffer->toString());
     }
 
     public function test_resetStyle(): void
     {
         $buffer = $this->buffer()->resetStyle();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[0m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[0m", $buffer->toString());
     }
 
     public function test_bold(): void
     {
         $buffer = $this->buffer()->bold();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[1m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[1m", $buffer->toString());
     }
 
     public function test_italic(): void
     {
         $buffer = $this->buffer()->italic();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[3m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[3m", $buffer->toString());
     }
 
     public function test_underline(): void
     {
         $buffer = $this->buffer()->underline();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[4m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[4m", $buffer->toString());
     }
 
     public function test_blink(): void
     {
         $buffer = $this->buffer()->blink();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[5m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[5m", $buffer->toString());
     }
 
     public function test_foregroundColor(): void
     {
         $buffer = $this->buffer()->fgColor(Color::Red);
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[38;5;9m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[38;5;9m", $buffer->toString());
     }
 
     public function test_backgroundColor(): void
     {
         $buffer = $this->buffer()->bgColor(Color::Red);
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals("\e[48;5;9m", $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame("\e[48;5;9m", $buffer->toString());
     }
 
     public function test_extract(): void
@@ -260,8 +260,8 @@ class BufferTest extends TestCase
             ->text('1')
             ->extract();
 
-        self::assertSame('1', $string);
-        self::assertEquals('', $buffer->toString());
+        $this->assertSame('1', $string);
+        $this->assertSame('', $buffer->toString());
     }
 
     public function test_clear(): void
@@ -270,25 +270,25 @@ class BufferTest extends TestCase
             ->text('1')
             ->clear();
 
-        self::assertInstanceOf(Buffer::class, $buffer);
-        self::assertEquals('', $buffer->toString());
+        $this->assertInstanceOf(Buffer::class, $buffer);
+        $this->assertSame('', $buffer->toString());
     }
 
     public function test_toString(): void
     {
-        self::assertEquals('', $this->buffer()->toString());
+        $this->assertSame('', $this->buffer()->toString());
 
         $string = $this->buffer()
             ->text('1')
             ->resetStyle()
             ->toString();
 
-        self::assertIsString($string);
-        self::assertEquals("1\e[0m", $string);
+        $this->assertIsString($string);
+        $this->assertSame("1\e[0m", $string);
     }
 
     public function test_cast_to_string(): void
     {
-        self::assertEquals('a', (string) $this->buffer()->text('a'));
+        $this->assertSame('a', (string) $this->buffer()->text('a'));
     }
 }
